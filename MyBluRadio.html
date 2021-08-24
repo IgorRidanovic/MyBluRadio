@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="mybluradio.css">
+  <title>My Blu Radio</title>
+</head>
+
+<body>
+<div>
+  <button id=stationButton_01 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_02 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_03 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_04 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_05 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_06 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_07 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_08 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_09 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_10 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_11 type="button" onclick="connect(id)">...</button>
+  <button id=stationButton_12 type="button" onclick="connect(id)">...</button>
+</div>
+
+<div>
+  <button class="stopbutton" id=stop type="button" onclick="connect(id)">Stop</button>
+</div>
+
+<script type="text/javascript" src="config.json"></script>
+<script type="text/javascript">
+
+
+// document.getElementById('stationButton_00').value=config[0].label;
+// document.getElementById('stationButton_01').innerHTML=config[1].label;
+// document.getElementById('stationButton_02').innerHTML=config[2].label;
+buttonCount = config.length
+var i;
+for (i = 1; i < buttonCount; i++) {
+  var elid = 'stationButton_' + i.toString().padStart(2, '0')
+  document.getElementById(elid).innerHTML=config[i].label;
+}
+
+function connect(buttonId) {
+
+  if (buttonId == 'stop') {
+    var uri=config[0].playerIP + ':' + config[0].playerPort + '/Stop'
+    var connectionMsg = 'Stopped streaming';
+  } else {
+    var idx=parseInt(buttonId.slice(-2));
+    var endpoint=config[0].playerIP + ':' + config[0].playerPort + '/Play?url=';
+    var uri=endpoint + config[idx].uri;
+    var connectionMsg = 'Connected:' + config[idx].label;
+  }
+
+  fetch(uri).then(function(response) {
+    return response.json();
+    }).then(function(data) {
+    console.log(data);
+    }).catch(function() {
+    console.log(connectionMsg);
+    });
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+// Player and streaming station configuration for MyBluRadio
+
+config = [
+  {
+     playerIP:"http://192.168.1.219",
+     playerPort:"11000"
+  },
+   {
+      label:"Radio Bežlja",
+      uri:"http://5.9.25.50:9346/;"
+   },
+   {
+      label:"Memory Radio 1",
+      uri:"http://www.memoryradio.de:4000/;"
+   },
+   {
+      label:"KPCC",
+      uri:"http://19793.live.streamtheworld.com/KPCC_FM.mp3?dist=KPCC"
+   },
+   {
+      label:"KXLU",
+      uri:"http://kxlu.streamguys1.com/kxlu-hi"
+   },
+   {
+      label:"KKJZ",
+      uri:"https://playerservices.streamtheworld.com/api/livestream-redirect/KKJZFMAAC.aac"
+   }
+];
